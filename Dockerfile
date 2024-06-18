@@ -4,8 +4,15 @@ FROM rocker/r-ver:4.2.3
 # Install required R packages
 RUN R -e "install.packages(c('shiny', 'DT', 'plotly', 'dplyr'), repos='http://cran.rstudio.com/')"
 
+# Show contents of root directory before copying
+RUN ls -la /
+
 # Copy your project files into the Docker image
 COPY . /home/rstudio/myproject
+
+# Show contents of the target directory after copying
+RUN ls -la /home/rstudio/myproject
+
 WORKDIR /home/rstudio/myproject
 
 # Expose the port Shiny will run on
